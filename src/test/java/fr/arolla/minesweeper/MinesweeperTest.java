@@ -86,24 +86,31 @@ public class MinesweeperTest {
     }
 
     @Test
+    public void when_I_create_a_game_all_nb_adjacent_mines_are_computed_into_cell(){
+        given_a_minesweeper().withWidth(4).withHeight(3).withCells(
+                MINE, EMPTY, EMPTY, MINE,
+                MINE, EMPTY, EMPTY, MINE,
+                MINE, EMPTY, MINE, MINE);
+        buildMinesweeper();
+        then_adjacent_mines_number_is(1, 2, 2, 1,
+                                      2, 4, 4, 3,
+                                      1, 3, 2, 2);
+    }
+
+    @Test
     public void when_I_uncover_an_empty_cell_with_adjacent_mine_game_do_not_recursively_uncover_adjacent_cells() {
         given_a_minesweeper().withWidth(4).withHeight(5).withCells(
                 MINE, EMPTY, EMPTY, EMPTY,
                 MINE, EMPTY, EMPTY, EMPTY,
                 MINE, EMPTY, EMPTY, EMPTY,
                 MINE, EMPTY, EMPTY, MINE,
-                MINE, MINE,  EMPTY, EMPTY);
+                MINE, MINE,  EMPTY, EMPTY  );
 
         when_I_uncover(1, 1);
 
         then_cells_are_uncovered(position(1, 1));
 
-        then_cells_are_covered(
-                position(0, 3),
-                position(1, 3),
-                position(2, 3),
-                position(3, 3),
-                position(4, 3));
+        then_cells_are_covered(position(0, 3), position(1, 3), position(2, 3), position(3, 3), position(4, 3));
     }
 
     @Test
@@ -118,10 +125,7 @@ public class MinesweeperTest {
         buildMinesweeper();
         when_I_uncover(0, 2);
 
-        then_cells_are_uncovered(
-                position(0, 3),
-                position(1, 3),
-                position(2, 3));
+        then_cells_are_uncovered(position(0, 3), position(1, 3), position(2, 3));
 
         then_cells_are_covered(
                 position(0, 0),
@@ -167,6 +171,18 @@ public class MinesweeperTest {
         }
         assertThat(nbMinesOnBoard).as("nombre de mines sur la grille").isEqualTo(nbMines);
 
+    }
+
+    private void then_adjacent_mines_number_is(int... nbMines) {
+        int line=0;
+        int column=0;
+        for (int nbMine : nbMines) {
+            assertThat(minesweeper.getCell(position(line, column)).getAdjacentMinesNumber()).as("Le nombre de mines adjacente de la case "+position(line, column)).isEqualTo(nbMine);
+            if (++column % minesweeper.getBoardWidth() == 0){
+                line++;
+                column=0;
+            }
+        }
     }
 
     private void then_cells_are_uncovered(Position... positions) {

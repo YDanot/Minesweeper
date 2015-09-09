@@ -16,22 +16,19 @@ public class MinesweeperBuilder {
 
     private Map<Position, Cell> cellMap;
 
+    private int line = 0;
+    private int column = 0;
+
     public static MinesweeperBuilder aMinesweeper() {
         return new MinesweeperBuilder();
     }
 
-    public MinesweeperBuilder withCell(Cell cell) {
+    private MinesweeperBuilder withCell(Cell cell) {
         if (this.cellMap == null) {
             cellMap = new HashMap<Position, Cell>();
         }
 
-        int positionHeight = height - 1;
-
-        if (height == 2){
-            positionHeight = height;
-        }
-
-        cellMap.put(new Position(cellMap.size() / width, cellMap.size() % positionHeight), cell);
+        cellMap.put(new Position(line, column), cell);
 
         return this;
     }
@@ -43,6 +40,10 @@ public class MinesweeperBuilder {
                 cell.mine();
             }
             withCell(cell);
+            if (++column % width == 0){
+                line++;
+                column=0;
+            }
         }
         return this;
     }
