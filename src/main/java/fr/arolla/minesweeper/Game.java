@@ -5,18 +5,18 @@ public class Game {
 
     public static void main(String[] args) {
         final Minesweeper minesweeper = createMinesweeper();
-
+        final MinesweeperRenderer minesweeperRenderer = new MinesweeperRenderer();
         while (isNotOver(minesweeper)) {
-            render(minesweeper);
+            render(minesweeperRenderer, minesweeper);
             play(minesweeper);
         }
 
-        endGame(minesweeper);
+        endGame(minesweeperRenderer, minesweeper);
     }
 
     private static Minesweeper createMinesweeper() {
-        int width = readInt("la largeur", 1, 100);
-        int height = readInt("la hauteur", 1, 100);
+        int width = readInt("la largeur", 1, 50);
+        int height = readInt("la hauteur", 1, 50);
         int nbMines = readInt("le nombre de mine", 1, width * height - 1);
         return new Minesweeper(width, height, nbMines);
     }
@@ -29,28 +29,28 @@ public class Game {
         return !minesweeper.gameIsLost() && !minesweeper.gameIsWon();
     }
 
-    private static void render(Minesweeper minesweeper) {
-        new MinesweeperRenderer(new MinesweeperView(minesweeper)).render();
+    private static void render(MinesweeperRenderer minesweeperRenderer, Minesweeper minesweeper) {
+        minesweeperRenderer.render(minesweeper);
     }
 
     private static void play(Minesweeper minesweeper) {
         final int linePlayed = readCellLine(minesweeper);
         final int columnPlayed = readCellColumn(minesweeper);
 
-        minesweeper.play(linePlayed - 1, columnPlayed - 1);
+        minesweeper.uncoverCell(linePlayed - 1, columnPlayed - 1);
     }
 
     private static int readCellLine(Minesweeper minesweeper) {
-        return readInt("la ligne", 1, minesweeper.getGameBoardHeight());
+        return readInt("la ligne", 1, minesweeper.getBoardHeight());
     }
 
     private static int readCellColumn(Minesweeper minesweeper) {
-        return readInt("la colonne", 1, minesweeper.getGameBoardWidth());
+        return readInt("la colonne", 1, minesweeper.getBoardWidth());
     }
 
-    private static void endGame(Minesweeper minesweeper) {
+    private static void endGame(MinesweeperRenderer minesweeperRenderer, Minesweeper minesweeper) {
         printEndMessage(minesweeper);
-        printUncoveredGameBoard(minesweeper);
+        printUncoveredGameBoard(minesweeperRenderer, minesweeper);
     }
 
     private static void printEndMessage(Minesweeper minesweeper) {
@@ -62,9 +62,9 @@ public class Game {
         System.out.println("\n");
     }
 
-    private static void printUncoveredGameBoard(Minesweeper minesweeper) {
+    private static void printUncoveredGameBoard(MinesweeperRenderer minesweeperRenderer, Minesweeper minesweeper) {
         minesweeper.uncoverAllCells();
-        render(minesweeper);
+        render(minesweeperRenderer, minesweeper);
     }
 
 }

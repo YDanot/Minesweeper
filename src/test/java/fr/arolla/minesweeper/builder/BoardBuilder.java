@@ -1,4 +1,6 @@
-package fr.arolla.minesweeper;
+package fr.arolla.minesweeper.builder;
+
+import fr.arolla.minesweeper.Board;
 
 public class BoardBuilder {
     private int width;
@@ -19,10 +21,6 @@ public class BoardBuilder {
     public BoardBuilder withHeight(int height) {
         this.height = height;
         return this;
-    }
-
-    public BoardBuilder but() {
-        return aBoard().withWidth(width).withHeight(height);
     }
 
     public Board build() {

@@ -1,33 +1,58 @@
 package fr.arolla.minesweeper;
 
 
-public enum Cell {
-    MINED_COVER,
-    MINED_UNCOVER,
-    EMPTY_COVER,
-    EMPTY_UNCOVER;
+import static fr.arolla.minesweeper.CellState.*;
+
+public class Cell {
+
+    public CellState state;
+    private int adjacentMinesNumber;
+
+    public Cell() {
+        this.state = EMPTY_COVER;
+        this.adjacentMinesNumber = 0;
+    }
+
+    public CellState getState() {
+        return state;
+    }
+
 
     public boolean isCoverered() {
-        return MINED_COVER.equals(this) || EMPTY_COVER.equals(this);
-     }
+        return MINED_COVER.equals(state) || EMPTY_COVER.equals(state);
+    }
 
     public boolean isMined(){
-        return MINED_UNCOVER.equals(this) || MINED_COVER.equals(this);
+        return MINED_UNCOVER.equals(state) || MINED_COVER.equals(state);
     }
 
     public boolean isEmpty() {
-        return EMPTY_UNCOVER.equals(this) || EMPTY_COVER.equals(this);
+        return EMPTY_UNCOVER.equals(state) || EMPTY_COVER.equals(state);
     }
 
-    public Cell uncover(){
-        switch (this){
-            case EMPTY_COVER :
-            case EMPTY_UNCOVER : return EMPTY_UNCOVER;
-            case MINED_COVER :
-            case MINED_UNCOVER : return MINED_UNCOVER;
+    public void uncover(){
+        switch (state){
+            case EMPTY_COVER : state = EMPTY_UNCOVER; break;
+            case MINED_COVER : state = MINED_UNCOVER; break;
+            default : break;
         }
-
-        return null;
     }
 
+    public void mine() {
+        state = MINED_COVER;
+    }
+
+    public int getAdjacentMinesNumber() {
+        return adjacentMinesNumber;
+    }
+
+    public void setAdjacentMinesNumber(int adjacentMinesNumber) {
+        this.adjacentMinesNumber = adjacentMinesNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "Cell{" + state +" " +adjacentMinesNumber +'}';
+    }
 }
+

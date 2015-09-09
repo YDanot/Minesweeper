@@ -1,0 +1,4 @@
+2015-09-09 16:47:42,544 WARN  [SoapUI] Could not find jfxrt.jar. Internal browser will be disabled.
+2015-09-09 16:47:42,544 WARN  [SoapUI] Missing folder [/home/yann/ext] for external libraries
+2015-09-09 16:47:42,721 INFO  [DefaultSoapUICore] initialized soapui-settings from [/home/yann/soapui-settings.xml]
+2015-09-09 16:47:43,058 INFO  [WorkspaceImpl] Loading workspace from [/home/yann/intellij-soapui-workspace.xml]

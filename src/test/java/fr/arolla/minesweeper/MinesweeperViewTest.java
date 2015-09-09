@@ -6,15 +6,14 @@ import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.Map;
 
-import static fr.arolla.minesweeper.Cell.EMPTY_COVER;
-import static fr.arolla.minesweeper.Cell.EMPTY_UNCOVER;
-import static fr.arolla.minesweeper.Cell.MINED_COVER;
+import static fr.arolla.minesweeper.CellState.EMPTY_COVER;
+import static fr.arolla.minesweeper.CellState.MINED_COVER;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class MinesweeperViewTest {
 
-    private MinesweeperBuilder minesweeperBuilder;
+/*    private MinesweeperBuilder minesweeperBuilder;
     private MinesweeperView minesweeperView;
 
     @Test
@@ -37,10 +36,6 @@ public class MinesweeperViewTest {
         minesweeperView = new MinesweeperView(minesweeperBuilder.build());
     }
 
-    private void then_cell_view_state_is(Position position, CellViewState cellViewState) {
-        assertThat(getGridView().get(position).getState()).as("le contenu de la case").isEqualTo(cellViewState);
-    }
-
     private void then_adjacent_mines_number_is(Position position, int nbMines) {
         assertThat(getGridView().get(position).getNbAdjacentMines()).as("Le nombre de mines adjacente").isEqualTo(nbMines);
     }
@@ -51,6 +46,6 @@ public class MinesweeperViewTest {
 
     private Position position(int line, int column) {
         return new Position(line, column);
-    }
+    }*/
 
 }

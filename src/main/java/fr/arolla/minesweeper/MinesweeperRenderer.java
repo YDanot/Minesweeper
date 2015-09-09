@@ -2,26 +2,20 @@ package fr.arolla.minesweeper;
 
 public class MinesweeperRenderer {
 
-    public final MinesweeperView minesweeperView;
-
-    public MinesweeperRenderer(MinesweeperView minesweeperView) {
-        this.minesweeperView = minesweeperView;
+    public void render(Minesweeper minesweeper) {
+        System.out.println(computeView(minesweeper));
     }
 
-    public void render() {
-        System.out.println(computeView());
-    }
-
-    private String computeView() {
+    private String computeView(Minesweeper minesweeper) {
         StringBuilder viewBuilder = new StringBuilder();
-        viewBuilder.append(getColumnHeaders());
+        viewBuilder.append(getColumnHeaders(minesweeper.getBoardWidth()));
 
-        for (int line = 0; line < minesweeperView.getGameBoardHeight(); line++) {
-            for (int column = 0; column < minesweeperView.getGameBoardWidth(); column++) {
+        for (int line = 0; line < minesweeper.getBoardHeight(); line++) {
+            for (int column = 0; column < minesweeper.getBoardWidth(); column++) {
                 if (column == 0) {
                     viewBuilder.append(getLineHeader(line));
                 }
-                viewBuilder.append(view(line, column));
+                viewBuilder.append(view(minesweeper.getCell(new Position(line, column))));
             }
             viewBuilder.append("\n");
         }
@@ -40,9 +34,9 @@ public class MinesweeperRenderer {
         return stringBuilder.toString();
     }
 
-    private String getColumnHeaders() {
+    private String getColumnHeaders(int gameBoardWidth) {
         StringBuilder stringBuilder = new StringBuilder();
-        for (int column = 0; column < minesweeperView.getGameBoardWidth(); column++) {
+        for (int column = 0; column < gameBoardWidth; column++) {
             if (column == 0)
                 stringBuilder.append("     ");
             stringBuilder.append(" " + (column + 1) + "  ");
@@ -52,27 +46,19 @@ public class MinesweeperRenderer {
         return stringBuilder.toString();
     }
 
-    private String view(int line, int column) {
-        final Position position = new Position(line, column);
-        final CellView cellView = minesweeperView.getCellView(position);
-        return view(cellView);
-    }
-
-    private String view(CellView cellView) {
+    private String view(Cell cell) {
         String view;
-        switch (cellView.getState()) {
-            case COVERED:
-                view = "#";
-                break;
-            case EMPTY:
-                view = String.valueOf(cellView.getNbAdjacentMines());
-                break;
-            case MINED:
-                view = "@";
-                break;
-            default:
-                view = "";
+
+        if (cell.isCoverered()){
+            view = "#";
         }
+        else if(cell.isMined()){
+            view = "@";
+        }
+        else {
+            view = String.valueOf(cell.getAdjacentMinesNumber());
+        }
+        
 
         return " " + view + " |";
     }

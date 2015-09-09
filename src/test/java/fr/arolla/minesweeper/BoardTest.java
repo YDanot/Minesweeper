@@ -1,5 +1,6 @@
 package fr.arolla.minesweeper;
 
+import fr.arolla.minesweeper.builder.BoardBuilder;
 import org.junit.Test;
 
 import java.util.Set;
