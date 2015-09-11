@@ -1,6 +1,6 @@
 package fr.arolla.minesweeper.builder;
 
-import fr.arolla.minesweeper.Board;
+import fr.arolla.minesweeper.board.Board;
 
 public class BoardBuilder {
     private int width;

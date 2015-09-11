@@ -1,6 +1,10 @@
 package fr.arolla.minesweeper;
 
 
+import fr.arolla.minesweeper.board.Board;
+import fr.arolla.minesweeper.board.Position;
+import fr.arolla.minesweeper.board.cell.Cell;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -23,14 +27,6 @@ public class Minesweeper {
         initGameBoard();
     }
 
-    public int getEmptyCoveredCellNumber() {
-        return emptyCoveredCellNumber;
-    }
-
-    public int getMinesNumber() {
-        return nbMines;
-    }
-
     public void uncoverCell(int line, int column) {
         final Position position = new Position(line, column);
         final Cell cell = getCell(position);
@@ -43,6 +39,12 @@ public class Minesweeper {
         }
     }
 
+    public void uncoverAllCells() {
+        for (Position position : cells.keySet()) {
+            uncover(position);
+        }
+    }
+
     private int computeAdjacentMinesNumber(Position position) {
         int counterMines = 0;
         for(Position adjacentposition : board.getAdjacentPositions(position)){
@@ -51,12 +53,6 @@ public class Minesweeper {
                 counterMines++;
         }
         return counterMines;
-    }
-
-    public void uncoverAllCells() {
-        for (Position position : cells.keySet()) {
-            uncover(position);
-        }
     }
 
     private void uncoverAdjacentEmptyCells(Position position) {
@@ -98,13 +94,6 @@ public class Minesweeper {
         computeMinesAdjacentNumber();
     }
 
-    public void computeMinesAdjacentNumber() {
-        for (Position position : cells.keySet()) {
-            final int adjacentMinesNumber = computeAdjacentMinesNumber(position);
-            cells.get(position).setAdjacentMinesNumber(adjacentMinesNumber);
-        }
-    }
-
     private void createEmptyCells() {
         for (int column = 0; column < board.getWidth(); column++) {
             for (int line = 0; line < board.getHeight(); line++) {
@@ -120,6 +109,13 @@ public class Minesweeper {
             cell.mine();
             emptyCoveredCellNumber--;
             minesCounter--;
+        }
+    }
+
+    private void computeMinesAdjacentNumber() {
+        for (Position position : cells.keySet()) {
+            final int adjacentMinesNumber = computeAdjacentMinesNumber(position);
+            cells.get(position).setAdjacentMinesNumber(adjacentMinesNumber);
         }
     }
 

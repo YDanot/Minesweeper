@@ -1,5 +1,7 @@
-package fr.arolla.minesweeper;
+package fr.arolla.minesweeper.game;
 
+
+import fr.arolla.minesweeper.Minesweeper;
 
 public class Game {
 

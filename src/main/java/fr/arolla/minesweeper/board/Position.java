@@ -1,4 +1,4 @@
-package fr.arolla.minesweeper;
+package fr.arolla.minesweeper.board;
 
 
 public class Position {

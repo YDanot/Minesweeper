@@ -1,8 +1,8 @@
 package fr.arolla.minesweeper.builder;
 
-import fr.arolla.minesweeper.Cell;
+import fr.arolla.minesweeper.board.cell.Cell;
 import fr.arolla.minesweeper.Minesweeper;
-import fr.arolla.minesweeper.Position;
+import fr.arolla.minesweeper.board.Position;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.HashMap;

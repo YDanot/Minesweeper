@@ -1,7 +1,7 @@
-package fr.arolla.minesweeper;
+package fr.arolla.minesweeper.board.cell;
 
 
-import static fr.arolla.minesweeper.CellState.*;
+import static fr.arolla.minesweeper.board.cell.CellState.*;
 
 public class Cell {
 

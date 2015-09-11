@@ -1,4 +1,4 @@
-package fr.arolla.minesweeper;
+package fr.arolla.minesweeper.game;
 
 
 import java.io.BufferedReader;

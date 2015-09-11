@@ -1,4 +1,8 @@
-package fr.arolla.minesweeper;
+package fr.arolla.minesweeper.game;
+
+import fr.arolla.minesweeper.Minesweeper;
+import fr.arolla.minesweeper.board.Position;
+import fr.arolla.minesweeper.board.cell.Cell;
 
 public class MinesweeperRenderer {
 
