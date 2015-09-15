@@ -1,6 +1,5 @@
-package fr.arolla.minesweeper;
+package fr.arolla.minesweeper.board;
 
-import fr.arolla.minesweeper.board.Position;
 import fr.arolla.minesweeper.builder.BoardBuilder;
 import org.junit.Test;
 

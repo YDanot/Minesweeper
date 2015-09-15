@@ -1,4 +1,4 @@
-package fr.arolla.minesweeper;
+package fr.arolla.minesweeper.game;
 
 
 import fr.arolla.minesweeper.board.Board;
@@ -31,7 +31,7 @@ public class Minesweeper {
         final Position position = new Position(line, column);
         final Cell cell = getCell(position);
 
-        if (cell != null && cell.isCoverered()) {
+        if (cell != null && cell.isCovered()) {
             uncover(position);
             if (!mineUncovered && noMineAdjacent(cell)) {
                 uncoverAdjacentEmptyCells(position);
@@ -59,7 +59,7 @@ public class Minesweeper {
         final Set<Position> adjacentPositions = board.getAdjacentPositions(position);
         for (Position adjacentPosition : adjacentPositions) {
             Cell adjacentCell = getCell(adjacentPosition);
-            if (adjacentCell.isEmpty() && adjacentCell.isCoverered()){
+            if (adjacentCell.isEmpty() && adjacentCell.isCovered()){
                 uncover(adjacentPosition);
                 if (noMineAdjacent(adjacentCell)) {
                     uncoverAdjacentEmptyCells(adjacentPosition);
@@ -150,4 +150,5 @@ public class Minesweeper {
     public int getBoardHeight() {
         return board.getHeight();
     }
+
 }

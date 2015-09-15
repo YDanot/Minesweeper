@@ -13,12 +13,7 @@ public class Cell {
         this.adjacentMinesNumber = 0;
     }
 
-    public CellState getState() {
-        return state;
-    }
-
-
-    public boolean isCoverered() {
+    public boolean isCovered() {
         return MINED_COVER.equals(state) || EMPTY_COVER.equals(state);
     }
 

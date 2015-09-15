@@ -1,6 +1,5 @@
 package fr.arolla.minesweeper.game;
 
-import fr.arolla.minesweeper.Minesweeper;
 import fr.arolla.minesweeper.board.Position;
 import fr.arolla.minesweeper.board.cell.Cell;
 
@@ -53,7 +52,7 @@ public class MinesweeperRenderer {
     private String view(Cell cell) {
         String view;
 
-        if (cell.isCoverered()){
+        if (cell.isCovered()){
             view = "#";
         }
         else if(cell.isMined()){

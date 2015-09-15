@@ -1,8 +1,10 @@
-package fr.arolla.minesweeper;
+package fr.arolla.minesweeper.game;
 
 import fr.arolla.minesweeper.board.Position;
 import fr.arolla.minesweeper.builder.MinesweeperBuilder;
+
 import org.junit.Test;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import static fr.arolla.minesweeper.builder.CellMineState.EMPTY;
 import static fr.arolla.minesweeper.builder.CellMineState.MINE;
@@ -161,7 +163,7 @@ public class MinesweeperTest {
 
     private void then_mines_number_is(int nbMines) {
         buildMinesweeper();
-        assertThat(minesweeper.getMinesNumber()).as("nombre de mines sur la grille").isEqualTo(nbMines);
+        assertThat(ReflectionTestUtils.getField(minesweeper, "nbMines")).as("nombre de mines sur la grille").isEqualTo(nbMines);
         int nbMinesOnBoard = 0;
         for (int column = 0; column < minesweeper.getBoardWidth(); column++) {
             for (int line = 0; line < minesweeper.getBoardHeight(); line++) {
@@ -188,13 +190,13 @@ public class MinesweeperTest {
 
     private void then_cells_are_uncovered(Position... positions) {
         for (Position position : positions) {
-            assertThat(minesweeper.getCell(position).isCoverered()).as("la case "+position+" est vide, adjacente au coup joué et sans mines adjacentes, elle doit être découverte").isFalse();
+            assertThat(minesweeper.getCell(position).isCovered()).as("la case "+position+" est vide, adjacente au coup joué et sans mines adjacentes, elle doit être découverte").isFalse();
         }
     }
 
     private void then_cells_are_covered(Position... positions) {
         for (Position position : positions) {
-            assertThat(minesweeper.getCell(position).isCoverered()).as("la case " + position + " n'est pas adjacente au coup joué, elle ne doit pas être découverte").isTrue();
+            assertThat(minesweeper.getCell(position).isCovered()).as("la case " + position + " n'est pas adjacente au coup joué, elle ne doit pas être découverte").isTrue();
         }
     }
 

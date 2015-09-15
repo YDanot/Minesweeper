@@ -1,7 +1,7 @@
 package fr.arolla.minesweeper.builder;
 
 import fr.arolla.minesweeper.board.cell.Cell;
-import fr.arolla.minesweeper.Minesweeper;
+import fr.arolla.minesweeper.game.Minesweeper;
 import fr.arolla.minesweeper.board.Position;
 import org.springframework.test.util.ReflectionTestUtils;
 
@@ -68,7 +68,7 @@ public class MinesweeperBuilder {
         if (cellMap != null){
             ReflectionTestUtils.setField(minesweeper, "cells", cellMap);
         }
-        minesweeper.computeMinesAdjacentNumber();
+        ReflectionTestUtils.invokeMethod(minesweeper, "computeMinesAdjacentNumber");
         return minesweeper;
     }
 }

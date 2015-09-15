@@ -1,8 +1,6 @@
 package fr.arolla.minesweeper.game;
 
 
-import fr.arolla.minesweeper.Minesweeper;
-
 public class Game {
 
     public static void main(String[] args) {
